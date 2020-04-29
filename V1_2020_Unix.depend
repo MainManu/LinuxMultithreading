@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1588104040 source:/home/manuel/sciebo/THK/RA/Praktikum/V1_2020_Unix/main.c
+	<stdio.h>
+	<stdlib.h>
+	"MovingBelt.h"
+	<pthread.h>
+
+1588104412 /home/manuel/sciebo/THK/RA/Praktikum/V1_2020_Unix/MovingBelt.h
+
+1587632045 source:/home/manuel/sciebo/THK/RA/Praktikum/V1_2020_Unix/MovingBelt.c
+	"MovingBelt.h"
+
+1588104862 source:/home/manuel/sciebo/THK/RA/Praktikum/V1_2020_Unix/MovingBelt_exec.c
+	<ctype.h>
+	<stdio.h>
+	"MovingBelt.h"
+
