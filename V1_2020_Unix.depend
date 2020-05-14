@@ -1,16 +1,51 @@
 # depslib dependency file v1.0
-1588104040 source:/home/manuel/sciebo/THK/RA/Praktikum/V1_2020_Unix/main.c
+1588284447 source:/home/manuel/sciebo/THK/RA/Praktikum/V1_2020_Unix/main.c
 	<stdio.h>
 	<stdlib.h>
 	"MovingBelt.h"
 	<pthread.h>
+	<time.h>
 
 1588104412 /home/manuel/sciebo/THK/RA/Praktikum/V1_2020_Unix/MovingBelt.h
 
 1587632045 source:/home/manuel/sciebo/THK/RA/Praktikum/V1_2020_Unix/MovingBelt.c
 	"MovingBelt.h"
 
-1588104862 source:/home/manuel/sciebo/THK/RA/Praktikum/V1_2020_Unix/MovingBelt_exec.c
+1588284320 source:/home/manuel/sciebo/THK/RA/Praktikum/V1_2020_Unix/MovingBelt_exec.c
+	<ctype.h>
+	<stdio.h>
+	"MovingBelt.h"
+
+1587632045 source:/home/manuel/sciebo/THK/RA/Praktikum/V1/V1_2020_Unix/MovingBelt.c
+	"MovingBelt.h"
+
+1588104412 /home/manuel/sciebo/THK/RA/Praktikum/V1/V1_2020_Unix/MovingBelt.h
+
+1588284320 source:/home/manuel/sciebo/THK/RA/Praktikum/V1/V1_2020_Unix/MovingBelt_exec.c
+	<ctype.h>
+	<stdio.h>
+	"MovingBelt.h"
+
+1589458885 source:/home/manuel/sciebo/THK/RA/Praktikum/V1/V1_2020_Unix/main.c
+	<stdio.h>
+	<stdlib.h>
+	"MovingBelt.h"
+	<pthread.h>
+	<time.h>
+
+1589458885 source:/home/manuel/sciebo/THK/RA/Praktikum/V1/Git/LinuxMultithreading/main.c
+	<stdio.h>
+	<stdlib.h>
+	"MovingBelt.h"
+	<pthread.h>
+	<time.h>
+
+1588104412 /home/manuel/sciebo/THK/RA/Praktikum/V1/Git/LinuxMultithreading/MovingBelt.h
+
+1587632045 source:/home/manuel/sciebo/THK/RA/Praktikum/V1/Git/LinuxMultithreading/MovingBelt.c
+	"MovingBelt.h"
+
+1589459094 source:/home/manuel/sciebo/THK/RA/Praktikum/V1/Git/LinuxMultithreading/MovingBelt_exec.c
 	<ctype.h>
 	<stdio.h>
 	"MovingBelt.h"

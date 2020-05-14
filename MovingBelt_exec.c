@@ -19,7 +19,9 @@
 
 extern InVector_MovingBelt inputVector;
 extern OutVector_MovingBelt outputVector;
-
+extern bool exec,
+            reset,
+            fsm_done;
 /*
   input function
    @param bool *reset     out   reset wanted
@@ -111,7 +113,7 @@ void exec_fsm_MovingBelt()
     OutVector_MovingBelt outV = {0};*/
     //replaced with global variable to enable cross thread communication
 
-    bool exec = false;
+    //bool exec = false;
     bool reset = true;
     /* Initialisation  */
     exec = fsm_MovingBelt( true, &inputVector, &outputVector);
@@ -119,10 +121,12 @@ void exec_fsm_MovingBelt()
     /* Example of execution LOOP */
     while(exec)
     {
-        exec = readInput_MovingBelt( &reset, &inputVector);
+        //exec = readInput_MovingBelt( &reset, &inputVector);
         if (!exec) break;
         exec = fsm_MovingBelt( reset, &inputVector, &outputVector);
-        writeOutput_MovingBelt(&outputVector);
+        fsm_done = true;
+        while(fsm_done){} //wait until Output is done
+        //writeOutput_MovingBelt(&outputVector);
         // ### INSERT OTHER STUFF HERE
         // ### NO WHILE LOOP OR UNCONTROLLED GETS, SCANF ETC.!!!
     } // end while loop of fsm

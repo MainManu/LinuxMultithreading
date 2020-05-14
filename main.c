@@ -10,20 +10,45 @@
 InVector_MovingBelt inputVector;
 OutVector_MovingBelt outputVector;
 bool fsmReset,
+     fsm_done,
      startTimer,
+     exec,
+     reset,
      timeElapsed;
 
 
 
 void inputReader(){
-    printf("Hello from input\n");
+    //system("gnome-terminal");
+    printf("test");
+    while(exec){
+        exec = readInput_MovingBelt( &reset, &inputVector);
+    }
+    //printf("Hello from input\n");
 }
 
 void outputWriter(){
-    printf("Hello from output\n");
+//system("gnome-terminal");
+    while(exec){
+        if(fsm_done){
+            exec = writeOutput_MovingBelt(&outputVector);
+            fsm_done = false;
+        }
+
+    }
+    /*printf("mL: %d\n",outputVector.mL);
+    printf("mR: %d\n",outputVector.mR);
+    printf("strT: %d\n",outputVector.strT);
+    printf("stamp: %d\n",outputVector.stamp);
+    system("xterm -- ls");*/
+   /* bool mL; // Motor moves left
+  bool mR; // Motor moves right
+  bool strT; // start Timer
+  uint32_t stamp; // x*/
 }
 
 void timer(){
+system("gnome-terminal");
     printf("Hello from timer\n");
 }
 

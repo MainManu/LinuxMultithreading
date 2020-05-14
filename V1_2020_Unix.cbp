@@ -31,6 +31,16 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Linker>
+			<Add option="-pthread" />
+		</Linker>
+		<Unit filename="MovingBelt.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="MovingBelt.h" />
+		<Unit filename="MovingBelt_exec.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
