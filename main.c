@@ -3,9 +3,10 @@
 #include "MovingBelt.h"
 #include <pthread.h>
 #include <time.h>
+#include <unistd.h>
 //#include "MovingBelt_exec.c"
 
-#define NUM_THREADS 4
+#define NUM_THREADS 3
 
 InVector_MovingBelt inputVector;
 OutVector_MovingBelt outputVector;
@@ -25,34 +26,54 @@ void waitForOutputUpdate(){
     output_updated = false;
 }
 
-void inputReader(){
+void io(){
+    uint64_t inputBuf,
+             outputBuf;
     //system("gnome-terminal");
     //printf("test");
-    while(exec){
-        exec = readInput_MovingBelt( &reset, &inputVector);
-        input_updated = true;
+    while(1){
+        //exec = readInput_MovingBelt( &reset, &inputVector);
+       printf("Enter hexadecimal value for bl: ");
+       scanf("%lx", &inputBuf);
+       inputVector.bl = (bool)inputBuf;
+       printf("Enter hexadecimal value for br: ");
+       scanf("%lx", &inputBuf);
+       inputVector.br = (bool)inputBuf;
+       printf("Enter hexadecimal value for limL: ");
+       scanf("%lx", &inputBuf);
+       inputVector.limL = (bool)inputBuf;
+       printf("Enter hexadecimal value for limR: ");
+       scanf("%lx", &inputBuf);
+       inputVector.limR = (bool)inputBuf;
+       printf("Enter hexadecimal value for tmO: ");
+       scanf("%lx", &inputBuf);
+       inputVector.tmO = (bool)inputBuf;
+       input_updated = true;
+
+       if(output_updated){
+            printf("\nActual output signal values of FSM");
+            outputBuf = (__int64_t) (outputVector.mL);
+            printf("\n  mL = %d ", outputBuf);
+            outputBuf = (__int64_t) (outputVector.mR);
+            printf("\n  mR = %d ", outputBuf);
+            outputBuf = (__int64_t) (outputVector.strT);
+            printf("\n  strT = %d ", outputBuf);
+            outputBuf = (__int64_t) (outputVector.stamp);
+            printf("\n  stamp = %d ", outputBuf);
+            waitForOutputUpdate();
+       }
+
     }
     //printf("Hello from input\n");
 }
 
-void outputWriter(){
-//system("gnome-terminal");
-    while(exec){
-        exec = writeOutput_MovingBelt(&outputVector);
-        waitForOutputUpdate();
+void fsmExecutor(){
+    fsm_MovingBelt(true, &inputVector, &outputVector);
+    while(1){
+        fsm_MovingBelt(false, &inputVector, &outputVector);
     }
-
-
-    /*printf("mL: %d\n",outputVector.mL);
-    printf("mR: %d\n",outputVector.mR);
-    printf("strT: %d\n",outputVector.strT);
-    printf("stamp: %d\n",outputVector.stamp);
-    system("xterm -- ls");*/
-   /* bool mL; // Motor moves left
-  bool mR; // Motor moves right
-  bool strT; // start Timer
-  uint32_t stamp; // x*/
 }
+
 
 void timer(){
 //system("gnome-terminal");
@@ -62,16 +83,14 @@ void timer(){
 int main(){
     pthread_t threads[NUM_THREADS];
     size_t stacksize;
-    int i,
-    rc[NUM_THREADS];
+    int rc[NUM_THREADS];
 
     input_updated = false;
     output_updated = false;
 
     rc[0] = pthread_create(&threads[0], NULL, exec_fsm_MovingBelt, (void * )0);
-    rc[1] = pthread_create(&threads[1], NULL, inputReader, (void * )1);
-    rc[2] = pthread_create(&threads[2], NULL, outputWriter, (void * )2);
-    rc[3] = pthread_create(&threads[3], NULL, timer, (void * )3);
+    rc[1] = pthread_create(&threads[1], NULL, io, (void * )1);
+    rc[2] = pthread_create(&threads[3], NULL, timer, (void * )3);
 
     if(rc[0]||rc[1]||rc[2]||rc[3]){
         printf("Error creating threads");

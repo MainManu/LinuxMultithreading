@@ -33,16 +33,17 @@
 	<pthread.h>
 	<time.h>
 
-1589640565 source:/home/manuel/sciebo/THK/RA/Praktikum/V1/Git/LinuxMultithreading/main.c
+1589650128 source:/home/manuel/sciebo/THK/RA/Praktikum/V1/Git/LinuxMultithreading/main.c
 	<stdio.h>
 	<stdlib.h>
 	"MovingBelt.h"
 	<pthread.h>
 	<time.h>
+	<unistd.h>
 
 1588104412 /home/manuel/sciebo/THK/RA/Praktikum/V1/Git/LinuxMultithreading/MovingBelt.h
 
-1589640528 source:/home/manuel/sciebo/THK/RA/Praktikum/V1/Git/LinuxMultithreading/MovingBelt.c
+1589648821 source:/home/manuel/sciebo/THK/RA/Praktikum/V1/Git/LinuxMultithreading/MovingBelt.c
 	"MovingBelt.h"
 
 1589459094 source:/home/manuel/sciebo/THK/RA/Praktikum/V1/Git/LinuxMultithreading/MovingBelt_exec.c
