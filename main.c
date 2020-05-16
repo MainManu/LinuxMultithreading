@@ -11,18 +11,26 @@ InVector_MovingBelt inputVector;
 OutVector_MovingBelt outputVector;
 bool fsmReset,
      fsm_done,
+     output_updated,
+     input_updated,
      startTimer,
      exec,
      reset,
      timeElapsed;
 
-
+void waitForOutputUpdate(){
+    while(!output_updated){
+        sleep(1);
+    }
+    output_updated = false;
+}
 
 void inputReader(){
     //system("gnome-terminal");
-    printf("test");
+    //printf("test");
     while(exec){
         exec = readInput_MovingBelt( &reset, &inputVector);
+        input_updated = true;
     }
     //printf("Hello from input\n");
 }
@@ -30,12 +38,11 @@ void inputReader(){
 void outputWriter(){
 //system("gnome-terminal");
     while(exec){
-        if(fsm_done){
-            exec = writeOutput_MovingBelt(&outputVector);
-            fsm_done = false;
-        }
-
+        exec = writeOutput_MovingBelt(&outputVector);
+        waitForOutputUpdate();
     }
+
+
     /*printf("mL: %d\n",outputVector.mL);
     printf("mR: %d\n",outputVector.mR);
     printf("strT: %d\n",outputVector.strT);
@@ -48,7 +55,7 @@ void outputWriter(){
 }
 
 void timer(){
-system("gnome-terminal");
+//system("gnome-terminal");
     printf("Hello from timer\n");
 }
 
@@ -56,7 +63,10 @@ int main(){
     pthread_t threads[NUM_THREADS];
     size_t stacksize;
     int i,
-        rc[NUM_THREADS];
+    rc[NUM_THREADS];
+
+    input_updated = false;
+    output_updated = false;
 
     rc[0] = pthread_create(&threads[0], NULL, exec_fsm_MovingBelt, (void * )0);
     rc[1] = pthread_create(&threads[1], NULL, inputReader, (void * )1);
